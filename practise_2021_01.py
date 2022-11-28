@@ -3,16 +3,16 @@ from Utils.tools import *
 
 def main():
 
-    def puzzle1():
-        data = get_input("00", True)
+    data = data = get_input("202101", True)
+
+    def puzzle1(data):
         depth_measurements = clean_list_ints(data)
 
         answer = compare_list_int(depth_measurements, "<")
         return answer
 
             
-    def puzzle2():
-        data = get_input("00", True)
+    def puzzle2(data):
         depth_measurements = clean_list_ints(data)
 
         list_of_sums = []
@@ -29,10 +29,11 @@ def main():
 
     
 
-        
+    result_puzzle1 = puzzle1(data)
+    result_puzzle2 = puzzle2(data)    
 
-    print(f"Answer for puzzle 1: {puzzle1()}")
-    print(f"Answer for puzzle 2: {puzzle2()}")
+    print(f"Answer for puzzle 1: {result_puzzle1}")
+    print(f"Answer for puzzle 2: {result_puzzle2}")
 
 
 if __name__ == "__main__":
