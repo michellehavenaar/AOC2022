@@ -75,3 +75,8 @@ def get_column(matrix, i):
     # i = 1 gives [2,5,8]
         column = [row[i] for row in matrix]
         return column
+
+def get_dict_key_by_value(val, my_dict):
+    for key, value in my_dict.items():
+        if val == value:
+            return key

@@ -10,69 +10,52 @@ shapes = {
     "Z": "scissors"
 }
 
-shape_selected = {
+shape_points = {
     "rock" : 1,
     "paper" : 2,
     "scissors" : 3
 }
 
-outcome = { 
+predetermined_outcome = { 
     "X": 0,
     "Y": 3,
     "Z": 6
 }
 
+rules = {
+    # [rock,paper,scissors]
+    # list holds the resulting points for that combination
+    # 0 = lose, 3 = draw, 6 = win
+    "rock" : [3,6,0],
+    "paper" : [0,3,6],
+    "scissors" : [6,0,3]
+}
 
+index = {
+    "rock": 0,
+    "paper": 1,
+    "scissors": 2
+}
 
-def calc_outcome(round):
+def calculate_score(round):
     score = 0
+    elf_shape = shapes[round[0]]
     your_shape = shapes[round[1]]
-    #add score for the shape selected
-    score += shape_selected[your_shape]
-    if shapes[round[0]] == shapes[round[1]]:
-        score+= 3
-    elif shapes[round[0]] == "rock":
-        if shapes[round[1]] == "paper":
-            score+=6
-    elif shapes[round[0]] == "paper":
-        if shapes[round[1]] == "scissors":
-            score+=6
-    elif shapes[round[0]] == "scissors":
-        if shapes[round[1]] == "rock":
-            score+=6
+    score += shape_points[your_shape]
+    possible_outcomes = rules[elf_shape]
+    round_outcome = possible_outcomes[index[your_shape]]
+    score += round_outcome
     return score
 
-def calc_outcome2(round):
+def calculate_score2(round):
     score = 0
-    #add score for win,lose,draw
-    score += outcome[round[1]]
-    if score == 0:
-        if shapes[round[0]] == "rock":
-            score += shape_selected["scissors"]
-        elif shapes[round[0]] == "paper":
-            score += shape_selected["rock"]
-        elif shapes[round[0]] == "scissors":
-            score += shape_selected["paper"]
-
-    elif score == 3:
-        if shapes[round[0]] == "rock":
-            score += shape_selected["rock"]
-        elif shapes[round[0]] == "paper":
-            score += shape_selected["paper"]
-        elif shapes[round[0]] == "scissors":
-            score += shape_selected["scissors"]
-    
-    elif score == 6:
-        if shapes[round[0]] == "rock":
-            score += shape_selected["paper"]
-        elif shapes[round[0]] == "paper":
-            score += shape_selected["scissors"]
-        elif shapes[round[0]] == "scissors":
-            score += shape_selected["rock"]
-    
+    elf_shape = shapes[round[0]]
+    score += predetermined_outcome[round[1]]
+    required_shape_index = rules[elf_shape].index(predetermined_outcome[round[1]])
+    # get key by value from dict index
+    required_shape = get_dict_key_by_value(required_shape_index, index)
+    score += shape_points[required_shape]
     return score
-
-
 
 
 def main():
@@ -81,29 +64,29 @@ def main():
     data = clean_list_strings(input)
     strategy_guide = [d.split(" ") for d in data]
 
-
-    def puzzle1(strategy_guide):
+    def puzzle_1(strategy_guide):
         total_score = 0
-        for round in strategy_guide:
-            result = calc_outcome(round)
-            total_score += result
-    
-        return(total_score)
 
-    def puzzle2(strategy_guide):
+        for round in strategy_guide:
+            result = calculate_score(round)
+            total_score += result
+        return total_score
+
+    def puzzle_2(strategy_guide):
         total_score = 0
+
         for round in strategy_guide:
-            result = calc_outcome2(round)
+            result = calculate_score2(round)
             total_score += result
-        
-        return(total_score)
+        return total_score
 
 
-    result_puzzle1 = puzzle1(strategy_guide)
-    result_puzzle2 = puzzle2(strategy_guide)
+
+    result_puzzle_1 = puzzle_1(strategy_guide)
+    result_puzzle_2 = puzzle_2(strategy_guide)
     
-    print(f"Puzzle 1 answer: {result_puzzle1}")
-    print(f"Puzzle 2 answer: {result_puzzle2}")
+    print(f"Puzzle 1 answer: {result_puzzle_1}")
+    print(f"Puzzle 2 answer: {result_puzzle_2}")
    
 
 if __name__ == "__main__":
