@@ -20,12 +20,8 @@ def main():
 
         sum_of_priorities = 0
         for backpack in list_of_backpacks:
-            backpack_comp1_set = set()
-            backpack_comp2_set = set()
-            for b in backpack[0]:
-                backpack_comp1_set.add(b)
-            for b in backpack[1]:
-                backpack_comp2_set.add(b)
+            backpack_comp1_set = set(backpack[0])
+            backpack_comp2_set = set(backpack[1])
 
             intersection = backpack_comp1_set.intersection(backpack_comp2_set)
 
@@ -40,15 +36,9 @@ def main():
 
         sum_of_priorities = 0
         for group in list_of_groups:
-            backpack_1 = set()
-            backpack_2 = set()
-            backpack_3 = set()
-            for b in group[0]:
-                backpack_1.add(b)
-            for b in group[1]:
-                backpack_2.add(b)
-            for b in group[2]:
-                backpack_3.add(b)
+            backpack_1 = set(group[0])
+            backpack_2 = set(group[1])
+            backpack_3 = set(group[2])
 
             #find intersections of three sets
             intersection_first_two_sets = backpack_1.intersection(backpack_2)
