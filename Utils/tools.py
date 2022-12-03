@@ -46,6 +46,11 @@ def clean_list_strings(list):
     string_list = [el.replace("\n", "") for el in list]
     return string_list
 
+def split_list_in_chunks(list, chunksize: int):
+    # list split into chunks of size (chunksize)
+    chunked_list = [list[i: i + chunksize] for i in range(0, len(list), chunksize)]
+    return chunked_list
+
 operator_dict = {
     '==': op.eq,
     '!=': op.ne,
