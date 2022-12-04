@@ -1,5 +1,6 @@
 
 import operator as op
+import re
 
 def get_input(day_number: str, test: bool):
     # gets raw data from the input file and outputs as a list with each line as an element
@@ -50,6 +51,9 @@ def split_list_in_chunks(list, chunksize: int):
     # list split into chunks of size (chunksize)
     chunked_list = [list[i: i + chunksize] for i in range(0, len(list), chunksize)]
     return chunked_list
+
+
+
 
 operator_dict = {
     '==': op.eq,
