@@ -3,15 +3,17 @@ import re
 from collections import deque
 from copy import deepcopy
 
-class Stack:
-
-    def __init__(self, number: int):
-        self.number = number
-        self.crates = deque()
-
 
 def get_stack_from_list(stack_list, number):
     return stack_list[number-1]
+
+def get_top_crates(stack_list):
+    top_crates = ""
+    for stack in stack_list:
+        top_crate = stack.pop()
+        top_crates += top_crate
+
+    return top_crates
 
 
 def main():
@@ -30,7 +32,7 @@ def main():
     width = len(stack_data[0])
 
 
-    #get the column 
+    # get the column which is the data per stack
     for i in range(width):
         column_of_crates = get_column(stack_data, i)
         initial_stack = deque()
@@ -39,6 +41,7 @@ def main():
                 initial_stack.append(c) 
         stacks.append(initial_stack)
 
+    # make a copy of the initial stacks to use in the second puzzle
     stacks_for_puzzle_2 = deepcopy(stacks)
 
 
@@ -47,17 +50,14 @@ def main():
             amount = procedure[0]
             start = procedure[1] 
             end = procedure[2]
-            move_from = get_stack_from_list(stacks, start)
-            move_to = get_stack_from_list(stacks, end)
+            move_from = get_stack_from_list(list_of_stacks, start)
+            move_to = get_stack_from_list(list_of_stacks, end)
             for _ in range(amount):
                 crate = move_from.pop()
                 move_to.append(crate)
 
-        # now tell me all the top crates
-        top_crates = ""
-        for stack in list_of_stacks:
-            top_crate = stack.pop()
-            top_crates += top_crate
+        # now get all the top crates
+        top_crates = get_top_crates(list_of_stacks)
 
         return top_crates
 
@@ -66,30 +66,18 @@ def main():
             amount = procedure[0]
             start = procedure[1] 
             end = procedure[2]
-            move_from = get_stack_from_list(stacks_for_puzzle_2, start)
-            move_to = get_stack_from_list(stacks_for_puzzle_2, end)
+            move_from = get_stack_from_list(list_of_stacks, start)
+            move_to = get_stack_from_list(list_of_stacks, end)
             crates = []
             for _ in range(amount):
                 crate = move_from.pop()
                 crates.insert(0,crate)
             move_to.extend(crates)
         
-        # now tell me all the top crates
-        top_crates = ""
-        for stack in list_of_stacks:
-            top_crate = stack.pop()
-            top_crates += top_crate
+        # now get all the top crates
+        top_crates = get_top_crates(list_of_stacks)
         
         return top_crates
-
-
-
-
-
-        
-
-
-    
 
 
 
