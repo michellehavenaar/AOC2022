@@ -20,6 +20,23 @@ def get_input(day_number: str, test: bool):
         return raw_data
 
 
+def get_input_flat(day_number: str, test: bool):
+    # gets raw data from the input file and outputs as a string from the open file
+    # provide the number of the day as a string and set test to True to run the test input
+
+    if (test == True):
+        file_name_add = "test"
+    else:
+        file_name_add = ""
+
+    file_name = f"Input/day{day_number}{file_name_add}.txt"
+
+    print(f"Retrieving input from: {file_name}, Test is {test}")
+
+    with open(file_name, 'r') as file:
+        raw_data = file.read()
+        return raw_data
+
 def get_input_in_blocks(day_number: str, test: bool):
     # gets raw data from the input file and outputs as a list with each block as an element
     # provide the number of the day as a string and set test to True to run the test input
