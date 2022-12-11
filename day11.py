@@ -66,7 +66,7 @@ class Monkey:
 
 def main():
     
-    input = get_input_in_blocks("11", True)
+    input = get_input_in_blocks("11", False)
     
     notes = [i.split("\n") for i in input]
 
@@ -148,6 +148,11 @@ def main():
             new_monkey = Monkey(monkey_number, starting_items, op, test)
             monkey_business.add_monkey(new_monkey)
 
+        modulo = 1
+        for monkey in monkey_business.monkeys:
+            modulo *= monkey.test["mod"]
+        print(f"product of all the mods is: {modulo}")
+
         for _ in range(1,rounds +1):
             # print(f"round {i}")
             for monkey in monkey_business.monkeys:
@@ -161,9 +166,9 @@ def main():
                     worry_level = monkey.calculate_worry_lvl(item)
                     # print(f"new worry level is {worry_level}")
                     # monkey gets bored
-                    mod = monkey.test["mod"]
-                    remainder = worry_level % mod
-                    new_worry_level = remainder + mod
+                    # mod = monkey.test["mod"]
+                    # remainder = worry_level % mod
+                    new_worry_level = worry_level % modulo
                     # print(f"worry level is decreased to {new_worry_level}")
                     receiving_monkey = monkey.perform_test(new_worry_level)
                     # monkey throws item
@@ -186,7 +191,10 @@ def main():
 
 
     # result_puzzle_1 = puzzle_1(20)
-    result_puzzle_2 = puzzle_2(20)
+    result_puzzle_2 = puzzle_2(10000)
+
+    
+
     
     
     # print(f"Puzzle 1 answer: {result_puzzle_1}")
