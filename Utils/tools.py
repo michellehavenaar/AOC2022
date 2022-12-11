@@ -79,6 +79,11 @@ operator_dict = {
     '<=': op.le,
     '>': op.gt,
     '>=': op.ge,
+    '+': op.add,
+    '-': op.sub,
+    '*': op.mul,
+    '/': op.truediv,
+    '//': op.floordiv
     }
 
 def compare_list_int(list, compare_op: str):
