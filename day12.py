@@ -61,7 +61,7 @@ def is_visited(visited_list, position):
 def main():
 
 
-    input = get_input("12", True)
+    input = get_input("12", False)
     data = clean_list_strings(input)
     
 
@@ -92,7 +92,7 @@ def main():
     end_found = False
     end_node = None
 
-    while len(queue) > 0:
+    while len(queue) > 0 or end_found:
         # get top of the queue
         current_node = queue.pop(0)
         # print(f"looking at node {current_node.position}")
