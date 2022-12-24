@@ -99,6 +99,17 @@ def compare_list_int(list, compare_op: str):
     return count
 
 
+def get_first_index(list:list, value):
+    i = list.index(value)
+    return i
+
+def get_last_index(list: list, value):
+    list.reverse()
+    i = list.index(value)
+    list.reverse()
+    return (len(list) - i) - 1
+
+
 def get_column(matrix, i):
     # gets a column in a matrix
     # matrix should be a 2d list
